@@ -1,0 +1,135 @@
+<html lang="en">
+	<head>
+		<title>Transactions</title>
+		<style>
+		body{background: url("../static/web/images/bg.png") repeat;}
+		table {
+		      width:95%;
+		}
+		th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: gray;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+
+  .nav-bar{
+     overflow:hidden;
+     position:relative;
+     align-items:center;
+     justify-content:center;
+        display:flex;
+        margin:0;
+        padding:0;
+        list-style-type:none;
+        height:100%;
+     }
+     li{overflow:hidden;}
+     .nav-bar a{
+     display:inline-block;
+     font-size:1vw;
+     text-decoration:none;
+     color:white;
+     padding:1vw;
+     width:10.5vw;
+     }
+     .nav-bar a:hover{
+      background:green;
+     }
+     ul.nav-bar li:nth-child(4){background:green;
+     }
+     .op{color:wheat;margin-top:20px;margin-left:43px;border-radius:5px;padding:8px;text-decoration: none;display:inline-block;background:gray; position:fixed;right:2vw;bottom:1vw;
+     }
+     .op:hover{ background: #edd683; color:gray;box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+     }
+		</style>
+		<link rel="shortcut icon" href="https://i.ibb.co/6BTjX3C/icon.png">
+	</head>
+	<body bgcolor="#d5b9b2">
+	<a class="op" style="position:fixed;top:1vw;background:#934422;bottom:auto;font-size:16px;" href="/logout" >Logout</a>
+	<a class="op"href="/addTransaction">Add Transactions</a>
+
+	  <center>   <div style="width:75%;margin-top:20px;">
+    <h1 style="margin-bottom:1px; text-align: center;background-color: #e19e30;font-size:2.2vw;box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);" >INDIAN OIL</h1>
+    <div style="height:2vw;background:#ab5a37;margin-top:0px;box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);">
+    <ul class="nav-bar">
+    <li><a href="/">Home </a></li>
+      <li><a href="/customers">Customers </a></li>
+    <li><a href="/employees" >Employees </a></li>
+    <li><a href="/transactions">Transactions </a></li>
+    <li><a href="/fuel_pumps">Fuel Pumps </a></li>
+    <li><a href="/fuel_tanks">Fuel Tanks </a></li>
+    </ul>
+        </div>
+    </div></center>
+
+
+
+<script>
+      var a='{{msg|e}}';
+      if(a.trim()!==''){
+      alert(a);
+      }
+        </script>
+		<div class="one">
+			<div class="content" align="center">
+				<div class="topbar">
+				 </br>
+					<h1>Welcome!! You are seeing all Transactions </h1>
+				</div>
+				<div class="contentbar">
+						<div class="border">
+							<table class="worddark" style="border-collapse:collapse;"></br></br>
+								<tr>
+									<th>Transaction ID</th>
+									<th>Date</th>
+									<th>Time</th>
+									<th>CustomerID</th>
+									<th>Customer Name</th>
+									<th>EmployeeID</th>
+									<th>Employee Name</th>
+									<th>Pump ID</th>
+									<th>Quantity</th>
+									<th>FuelType</th>
+									<th>PricePerLtr</th>
+									<th>Total amount</th>
+
+
+								</tr>
+								{% for row in TR %}
+								<tr>
+									<td>{{ row.TransactionID }}</td>
+									<td>{{ row.Date }}</td>
+									<td>{{ row.Time}}</td>
+									<td>{{ row.CustID}}</td>
+									<td>{{ row.CFN}} {{ row.CLN}}</td>
+									<td>{{ row.EmpID}}</td>
+									<td>{{ row.EFN}} {{ row.ELN}}</td>
+									<td>{{ row.PumpID}}</td>
+									<td>{{ row.Quantity}}</td>
+									<td>{{ row.FuelType}}</td>
+									<td>{{ row.PricePerLtr}} &#x20B9;</td>
+									<td>{{ row.TotalPrice}} &#x20B9;</td>
+								</tr>
+				         {% endfor %}
+
+							</table>
+						</div>
+
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>

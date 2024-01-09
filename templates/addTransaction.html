@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>addTransaction</title>
+    <style>
+    /* CSS for the entire page */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: url("../static/web/images/bg.png") repeat;
+    }
+
+    /* CSS for the form container */
+    .form-container {
+      width: 50%;
+      margin:auto;
+      margin-top:20px;
+      padding: 20px;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      box-shadow: 0 90px 90px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Style for the form title */
+    h2 {
+      box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+      padding: 5px;
+      background-color: #007bff;
+      text-align: center;
+      font-size: 1.5vw;
+      margin-bottom: 20px;
+      color: white;
+      border-radius: 7px;
+    }
+
+    /* Style for labels */
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Style for input fields and textarea */
+    input,
+    select,
+    textarea {
+      width: 96%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 2px solid #ccc;
+      border-radius: 3px;
+      font-size: 16px;
+      background-color: #fff;
+    }
+
+    /* Style for required fields */
+    input,
+    textarea {
+      border-color: aqua;
+      box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Style for the submit button */
+    input[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Style for the submit button on hover */
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .op{color:wheat;margin-top:20px;margin-left:43px;border-radius:5px;padding:8px;text-decoration: none;display:inline-block;background:gray;position:fixed;left:2vw;top:1vw;
+     }
+     .op:hover{ background: #edd683; color:gray;box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+     }
+    </style>
+    <link rel="shortcut icon" href="https://i.ibb.co/6BTjX3C/icon.png">
+</head>
+<body> <a class="op"href="/transactions" >See Transactions</a>
+<script>
+      var a='{{msg|e}}';
+      if(a.trim()!==''){
+      alert(a);
+      }
+</script>
+ <div class="form-container">
+    <h2>Fill Transaction Details</h2>
+    <form  method="post">
+        <label for="customer_id">Customer ID:</label>
+        <input type="number" id="customer_id" name="customer_id"><br><br>
+
+        <label for="employee_id">Employee ID:</label>
+        <input type="number" id="employee_id" name="employee_id"><br><br>
+
+        <label for="pump_id">Choose a Pump:</label>
+        <select id="pump_id" name="pump_id">
+            {% for row in pumps %}
+                <option value="{{ row.PumpID }}">{{ row.PumpID }} {{ row.FuelType }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="quantity">Quantity (in Ltr):</label>
+        <input type="number" step="0.01" id="quantity" name="quantity"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+    <br>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<html lang="en">
+	<head>
+		<title>customers</title>
+		<style>
+		body{background: url("../static/web/images/bg.png") repeat;}
+		table {
+		     width:75%;
+		}
+		th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+
+  }
+
+  th {
+    background-color: gray;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  .op{color:wheat;margin-top:20px;margin-left:43px;border-radius:5px;padding:8px;text-decoration: none;display:inline-block;background:gray; position:fixed;right:2vw;bottom:1vw;
+     }
+     .op:hover{ background: #edd683; color:gray;box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+     }
+     .nav-bar{
+     overflow:hidden;
+     position:relative;
+     align-items:center;
+     justify-content:center;
+        display:flex;
+        margin:0;
+        padding:0;
+        list-style-type:none;
+        height:100%;
+     }
+     li{overflow:hidden;}
+     .nav-bar a{
+     display:inline-block;
+     font-size:1vw;
+     text-decoration:none;
+     color:white;
+     padding: 1vw;
+     width:10.5vw;
+     }
+     .nav-bar a:hover{
+      background:green;
+     }
+     ul.nav-bar li:nth-child(2){background:green;
+     }
+		</style>
+<link rel="shortcut icon" href="https://i.ibb.co/6BTjX3C/icon.png">
+	</head>
+	<body > <a class="op" href="/customers" >Customers</a>
+
+	<a class="op" style="position:fixed;top:1vw;background:#934422;bottom:auto;font-size:16px;" href="/logout" >Logout</a>
+ <center>   <div style="width:75%;margin-top:20px;">
+    <h1 style="margin-bottom:1px; text-align: center;background-color: #e19e30;font-size:2.2vw;box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);" >INDIAN OIL</h1>
+    <div style="height:2vw;background:#ab5a37;margin-top:0px;box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);">
+    <ul class="nav-bar">
+    <li><a href="/">Home </a></li>
+    <li><a href="/customers">Customers </a></li>
+    <li><a href="/employees" >Employees </a></li>
+    <li><a href="/transactions">Transactions </a></li>
+    <li><a href="/fuel_pumps">Fuel Pumps </a></li>
+    <li><a href="/fuel_tanks">Fuel Tanks </a></li>
+    </ul>
+        </div>
+    </div></center>
+
+		<div class="one">
+		   <a class="op"href="/addCustomer">Add customers</a>
+			<div class="content" align="center">
+				<div class="topbar">
+					<h1>Welcome!! You are seeing all <b style="display:inline-block; border-radius:5px;background-color:white;padding:5px;height:32px;">{{count}} </b> Customers </h1>
+				</div> </br>
+				<div class="contentbar">
+						<div class="border">
+							<table class="worddark" style="border-collapse:collapse;"></br></br>
+								<tr>
+									<th>Customer ID</th>
+									<th>Name</th>
+									<th>Email ID</th>
+									<th>Contacts</th>
+									<th>Address</th>
+
+								</tr>
+								{% for row in Cus %}
+								<tr>
+									<td> {{ row.CustomerID }} </td>
+									<td> {{ row.FirstName}} {{ row.LastName}} </td>
+									<td> {{ row.Email }} </td>
+									<td><center><ul style="padding:0;margin-bottom:0;" >{% for contact in contact_list[loop.index0] %}<li> {{ contact }} </li>{% endfor %}</ul></center></td>
+									<td> {{ row.Address}} </td>
+								</tr>
+				         {% endfor %}
+
+							</table>
+						</div>
+
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>

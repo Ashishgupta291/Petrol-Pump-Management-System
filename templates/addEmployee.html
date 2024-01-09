@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>AddEmployee</title>
+  <style>
+    /* CSS for the entire page */
+    body{background: url("../static/web/images/bg.png") repeat;}
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    /* CSS for the form container */
+    .form-container {
+
+      width: 40%;
+      margin:auto;
+      margin-top:20px;
+      padding: 20px;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      box-shadow: 0 90px 90px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Style for the form title */
+    h2 {box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+      padding:0.25vw;
+      background-color:#007bff;
+      text-align: center;
+      font-size: 1.5vw;
+      margin-bottom: 20px;
+      color: white;
+      border-radius:7px;
+    }
+
+    /* Style for labels */
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Style for input fields and textarea */
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 96%;
+      padding: 0.6vw;
+      margin-bottom: 0.5vw;
+      border: 2px solid #ccc;
+      border-radius: 3px;
+      font-size: 1.1vw;
+      background-color: #fff;
+
+    }
+    select{
+      width: 60%;
+      padding: 0.6vw;
+      margin-bottom: 0.5vw;
+      border: 2px solid #ccc;
+      border-radius: 3px;
+      font-size: 1.1vw;
+      background-color: #fff;}
+
+    /* Style for required fields */
+    input,select,
+    textarea {
+      border-color: aqua;
+      box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Style for the submit button */
+    input[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 0.5vw;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      font-size: 1vw;
+      cursor: pointer;
+    }
+
+    /* Style for the submit button on hover */
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .contact_entry{
+      border-radius:10px;
+      padding:0.5vw;
+      background-color:lightgray;
+    }
+    .op{color:wheat;margin-top:20px;margin-left:43px;border-radius:5px;padding:8px;text-decoration: none;display:inline-block;background:gray; position:fixed;left:2vw;top:1vw;
+     }
+     .op:hover{ background: #edd683; color:gray;box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+     }
+  </style>
+<link rel="shortcut icon" href="https://i.ibb.co/6BTjX3C/icon.png">
+</head>
+<body>  <a class="op"href="/employees" >See Employees</a>
+<script>
+      var a='{{msg|e}}';
+      if(a.trim()!==''){
+      alert(a);
+      }
+</script>
+  <div class="form-container">
+    <h2>Fill Employee Details</h2>
+    <form id="insertForm" method="post">
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" required><br><br>
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" ><br><br>
+
+    <label for="position">Select a Position:</label>
+    <select id="position" name="position">
+            {% for item in items %}
+                <option value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+    </select><br><br>
+
+    <label for="email">Email ID:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" rows="4" required></textarea><br><br>
+
+
+    <div id="contact_fields">
+            <div class="contact_entry">
+                <label for="contact">contact:</label>
+                <input type="text" id="contact" name="contact" required><br>
+
+                <button type="button" class="remove_contact">Remove</button><br/>
+            </div>
+    </div>
+         <br/><br/>
+     <button type="button" id="add_contact" style="width:150px;font-size:15px">Add More</button> <br><br>
+
+    <input type="submit" value="Register">
+  </form>
+  </div>
+  <br>
+  <script>
+        document.getElementById("add_contact").addEventListener("click", function() {
+            var contactFields = document.getElementById("contact_fields");
+            var contactEntry = document.querySelector(".contact_entry").cloneNode(true);
+            contactEntry.style.backgroundColor = "lightgray";
+            // Clear the input values in the cloned fields
+            contactEntry.querySelector("#contact").value = "";
+            // Change background color of old entries
+            var oldcontactEntries = document.querySelectorAll(".contact_entry");
+            for (var i = 0; i < oldcontactEntries.length; i++) {
+            oldcontactEntries[i].style.backgroundColor = "transparent"; // Change to the desired color
+          }
+            contactFields.appendChild(contactEntry);
+
+            // Add an event listener to the remove button for the cloned fields
+            contactEntry.querySelector(".remove_contact").addEventListener("click", function() {
+                contactFields.removeChild(contactEntry);
+            });
+        });
+    </script>
+</body>
+</html>
