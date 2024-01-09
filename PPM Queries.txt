@@ -1,0 +1,45 @@
+create database ppm;
+use ppm;
+
+create table Customer(CustomerID int AUTO_INCREMENT PRIMARY KEY,FirstName varchar(50) not null, LastName varchar(50),Address
+text not null,Email varchar(50) unique);
+
+create table Cust_contact(CustomerID int, Contact varchar(15) not null, primary key(CustomerID,Contact), foreign key(CustomerID) references Customer(CustomerID));
+
+create table Positions(Position_name varchar(50) primary key,Salary decimal(10,2) check(Salary>0));
+
+create table Employee(EmployeeID int AUTO_INCREMENT PRIMARY KEY,FirstName varchar(50) not null, LastName varchar(50),Address
+text not null,Email varchar(50) unique,Position_name varchar(50),JoiningDate DATE NOT NULL,foreign key(Position_name) references Positions(Position_name));
+
+create table Emp_contact(EmployeeID int, Contact varchar(15) not null, primary key(EmployeeID,Contact), foreign key(EmployeeID) references Employee(EmployeeID));
+
+create table Fuel(FuelType varchar(50) primary key,PricePerLtr decimal(10,2) check(PricePerLtr>0));
+
+create table FuelTank(TankID int AUTO_INCREMENT primary key,Capacity decimal(10,2) check(Capacity>0),CurrentVolume decimal(10,2) check(CurrentVolume>0 or CurrentVolume=0),FuelType varchar(50),Status enum('active','inactive'),foreign key(FuelType) references Fuel(FuelType));
+
+create table FuelPump(PumpID int AUTO_INCREMENT PRIMARY KEY,TankID int,Status enum('active','inactive'),foreign key(TankID) references FuelTank(TankID));
+
+create table Transaction(TransactionID int AUTO_INCREMENT PRIMARY KEY,Date DATE, Time TIME,Quantity decimal(10,2) check(Quantity>0),PumpID int not null,CustomerID int not null,EmployeeID int not null, foreign key(CustomerID) references Customer(CustomerID), foreign key(EmployeeID) references Employee(EmployeeID), foreign key(PumpID) references FuelPump(PumpID));
+
+insert into Positions(Position_name,Salary) values('Attendant',5000.50),('Manager',9000.50),('Technician',6000.00),('Worker',1000.00);
+
+insert into Employee(FirstName,LastName,Address,Email,Position_name,JoiningDate) values('Ashish','Gupta','Dubari, Mau','ansu@gmail.com','Manager','2023-11-2'),('krishna','Gupta','belthra road, Mau','krish@gmail.com','Attendant','2023-11-1');
+
+insert into Customer(FirstName,LastName,Address,Email) values('shivani','singh','patna','shivani291@gmail.com'),('bittu','raj','gkp','bittu@gmail.com');
+
+insert into Fuel(FuelType, PricePerLtr) values('Premium Petrol',70.50),('Regular Petrol',67.50),('Diesel',60.50),('CNG',63.50);
+
+insert into FuelTank(Capacity,CurrentVolume,FuelType,Status) values(20000.00,15000.00,'CNG','active'),(25000.00,17000.50,'Premium Petrol','active'),(25000.00,10000.50,'Premium Petrol','inactive'),(20000.00,10000.00,'Regular Petrol','active'),(24000.00,18000.50,'Diesel','active'),(30000.00,19000.50,'Regular Petrol','active');
+
+insert into FuelPump( TankID, Status) values(1,'active'),(1,'active'),(3,'active'),(4,'active'),(4,'inactive'),(6,'active'),(2,'inactive');
+
+insert into Transaction(Date,Time,Quantity,PumpID,CustomerID,EmployeeID) values('2023-11-02','12:30:45',12.50,2,1,2),('2023-11-03','11:30:15',10.00,1,2,2);
+
+
+create table account(user_name varchar(50) primary key,password varchar(50) not null);
+
+insert into account(user_name,password) values('Ashish Gupta','ashish@291'),('Krishna Gupta','krishnaG');
+
+insert into Cust_contact(CustomerID,Contact) values(1,'9721181441'),(1,'8112702398'),(2,'7891181441');
+
+insert into Emp_contact(EmployeeID,Contact) values(1,'5721181441'),(2,'8812702398'),(2,'7991181551');
